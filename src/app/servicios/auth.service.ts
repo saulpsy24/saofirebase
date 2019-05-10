@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import {map} from 'rxjs/operators';
+import {map,first} from 'rxjs/operators';
 import { Observable, of, Subject } from 'rxjs';
 
 @Injectable({
@@ -30,9 +30,21 @@ export class AuthService {
     })
   }
 
-  getAuth(){
-    return this.afAuth.authState.pipe(map (auth => {auth}));
-  }﻿
+  isLoggedIn() {
+    return this.afAuth.authState.pipe(first()).toPromise();
+ }
+ async doSomething() {
+  const user = await this.isLoggedIn()
+  if (user) {
+    
+    return user;
+    // do something
+  } else {
+    return null;
+    // do something else
+ }
+}
+ 
 
   logout() {
     return this.afAuth.auth.signOut();
