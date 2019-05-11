@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import {FlashMessagesModule,FlashMessagesService } from 'angular2-flash-messages'
+
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -26,12 +28,14 @@ import {LoggedGuard} from './guards/logged.guard'
     RegisterPageComponent,
     LoginPageComponent,
     PrivadoPageComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    FlashMessagesModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
@@ -39,7 +43,8 @@ import {LoggedGuard} from './guards/logged.guard'
     AuthService,
     AngularFireAuth,
     AuthGuard,
-    LoggedGuard
+    LoggedGuard,
+    FlashMessagesService
   ],
   bootstrap: [AppComponent]
 })

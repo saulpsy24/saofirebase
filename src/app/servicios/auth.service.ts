@@ -16,8 +16,8 @@ export class AuthService {
   registerUser(email: string, password: string) {
     return new Promise((resolve, reject) => {
       this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-        .then(userData => resolve(userData)),
-        err => reject(err);
+        .then(userData => resolve(userData),
+        err => reject(err));
     })
   }
 
@@ -25,10 +25,11 @@ export class AuthService {
   loginUser(email:string,password:string){
     return new Promise((resolve,reject)=>{
       this.afAuth.auth.signInWithEmailAndPassword(email,password)
-      .then(userData=>resolve(userData)),
-      err=>reject(err);
+      .then(userData=>resolve(userData),
+      err=>reject(err));
     })
   }
+
 
   //servicio para checar si tenemos sesion iniciada
 

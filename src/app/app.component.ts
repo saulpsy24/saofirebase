@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {FlashMessagesService} from 'angular2-flash-messages'
 
 @Component({
   selector: 'app-root',
@@ -6,7 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'saofirebase';
+  title = 'SAO DISOLUTIONS';
+  constructor(
+    public flashMessage: FlashMessagesService,
+   
+  ) { }
 
   ngOnInit(){
     
