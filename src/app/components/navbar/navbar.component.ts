@@ -8,8 +8,9 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   public isLogin: boolean;
-  public nombreuser: string;
-  public email: string;
+  public nombreuser:string;
+  public email : string;
+  
   public currentuser: Object;
   constructor(
     public authService: AuthService,
@@ -17,11 +18,13 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
     /** Cuando iniciamos sesion, se setea un item en Session Storage (volatil al cerrar el browser), si ese elemento existe, ya no hace comprobacion a firebase
     si no lo encuentra, procede a verificar con firebase si estamos logueados
     */
     if (sessionStorage.getItem("auth") == "ok") {
-
+      this.nombreuser = sessionStorage.getItem("name");
+      this.email = sessionStorage.getItem("email");
       this.isLogin = true;
 
     } else {
@@ -29,15 +32,18 @@ export class NavbarComponent implements OnInit {
       //si es nulo, quiere decir que no hay usuario loggueado, si no es nulo, nos devuelve un objeto de firebase
       this.authService.doSomething().then((auth) => {
 
-        if (auth) {
-          sessionStorage.setItem("auth", "ok");
-        }
+       
         if (auth == null) {
           this.isLogin = false
         } else {
+          sessionStorage.setItem("auth","ok");
           this.isLogin = true;
-          this.nombreuser = auth.displayName;
+          auth.displayName ? this.nombreuser = auth.displayName : this.nombreuser ="";
+          
           this.email = auth.email;
+          sessionStorage.setItem("email",this.email);
+          sessionStorage.setItem("name",this.nombreuser);
+          
         }
 
       })

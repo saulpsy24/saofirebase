@@ -30,6 +30,8 @@ export class AuthService {
     })
   }
 
+  //servicio para checar si tenemos sesion iniciada
+
   isLoggedIn() {
     return this.afAuth.authState.pipe(first()).toPromise();
  }
@@ -44,6 +46,8 @@ export class AuthService {
     // do something else
  }
 }
+
+//servicio para salir del sistema
  
 
   logout() {
